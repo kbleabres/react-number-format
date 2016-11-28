@@ -200,7 +200,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var cursorPos = this.refs.input.selectionStart;
 
 	    //change the state
-	    this.setState({ value: formattedValue });
+	    this.setState({ value: formattedValue }, function () {
+	      cursorPos = _this.getCursorPosition(inputValue, formattedValue, cursorPos);
+	      _this.setCaretPosition(cursorPos);
+	      if (callback) callback(e, value);
+	    });
 
 	    return value;
 	  },
